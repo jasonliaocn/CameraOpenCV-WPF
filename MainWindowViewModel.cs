@@ -32,10 +32,11 @@ namespace CameraOpenCV
             ShutterCommand.Subscribe(x =>
             {
                 var bitmap = CameraCaptureSource.Value;
-                var result = new SaveFileDialog();
-                if (result.ShowDialog() == DialogResult.OK)
+                var saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "png|*.png";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllBytes(result.FileName, bitmap.ToMat().ToBytes()); 
+                    File.WriteAllBytes(saveFileDialog.FileName, bitmap.ToMat().ToBytes()); 
                 }
             });
         }
